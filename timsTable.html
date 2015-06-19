@@ -1,0 +1,197 @@
+<html>
+ <head>
+    <link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="./css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/tms.css">
+<link rel="stylesheet" type="text/css" href="./css/oldLook.css">
+    <script type="text/javascript" src="./js/jquery-1.7.min.js"></script>
+	<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="./js/jquery-ui.js"></script>
+	<script type="text/javascript" src="./js/jquery.blockUI.js"></script>
+	<script type="text/javascript" src="./js/tims.min-1.2.5.js"></script>
+	<script type="text/javascript" src="./js/Btree.min.js"></script>
+	<script src="./js/jquery.treetable.js"></script>
+	<script type="text/javascript">
+	   $(document).ready(function(){
+	   //$("#dataGrid").hide();
+	   $("#refreshAndExport").hide();
+	   
+	     	tims.loadTreeView('dataGrid');
+			tims.resultTable();
+	       $("#searchBtn").click(function(){
+		         var data=tims.Floders($("#searchTxt").val());
+			    //tims.preparedStructure();
+		    });
+			//New search button
+			 $("#value_go").click(function(){
+		         var data=tims.Floders($("#value").val());
+			    //tims.preparedStructure();
+		    });
+			//new search end
+			
+			//close window
+			 close_window=function() {
+			 window.open('','_self');
+				
+			}
+			
+			refresh=function(){
+			 //$("#dataGrid").hide();
+			 //$("#refreshAndExport").hide();
+			 var data=tims.Floders($("#value").val());
+			
+			}
+			refresh1=function(){
+			 //$("#dataGrid").hide();
+			 //$("#refreshAndExport").hide();
+			 $("#refreshSpan").html('<img class="link-normal" id="refresh_menu" alt="" src="/images/menu/refresh_a.gif" style="cursor: default;" onclick="refresh()">');
+			var data=tims.Floders($("#value").val());
+			 $("#refreshSpan").html('<img class="link-normal" id="refresh_menu" alt="" src="/images/menu/refresh.gif" style="cursor: default;" onclick="refresh()">');
+			
+			}
+			
+			downloadExcel=function(){
+			  tims.exportExcel('exportDatagrid','dataLink');
+			 // e.preventDefault();
+			}
+		  $("#searchBtn1").click(function(){
+               tims.demo('dataGrid');
+           });		  
+ 	   });
+	   $(document).ajaxStart(function(){
+	        $.blockUI({ fadeIn : 0,
+                    fadeOut : 0,
+                    showOverlay : false});   
+		});
+		$(document).ajaxComplete(function(){
+		    $.unblockUI(); 
+		});
+		
+
+	</script>
+</head>
+<body>
+  <!--Start BannerInformation-->
+ <!-- <div id="banner" style="background-image: url(./images/banner.png); height: 100px; width: 100%;">
+     <table style="width: 100%; height: 100%">
+        <tr>
+            <td style="width: 100%; height: 100%; vertical-align: middle;">
+              <h1>Test Information Management System</h1>
+            </td>
+        </tr>
+    </table>
+  </div>-->
+<!--End BannerInformation-->
+<!--Start SubTitle-->
+  <div style="width:600px;height:23px;text-align:center;background-image:url(images/menu/titlebar_bg.gif)">
+<div style="float:left;width:9px">
+<img alt="" src="images/menu/titlebar_l.gif">
+</div>
+<div style="float:right;width:9px">
+<img alt="" src="images/menu/titlebar_r.gif">
+</div>
+<div style="padding-top:0px">
+<img alt="" style="vertical-align:middle;margin-right:5px" src="images/objects/report.gif">
+<span class="font-medium" style="font-weight:bold;vertical-align:top">Summary Report</span>
+</div>
+</div>
+<div style="height:22px;width:600px;text-align:right;background-image:url(images/menu/menubar_bg.gif)">
+<span id="refreshSpan">
+<img class="link-normal" id="refresh_menu" alt="" src="/images/menu/refresh.gif" style="cursor: default;" onclick="refresh1()">
+</span>
+<!--span>
+<img id="close_menu" alt="" src="/images/menu/close.gif" style="cursor: default;" onclick="close_window();return false;">
+</span-->
+<img width="10" height="10" alt="" src="images/misc/shim.gif">
+</div>
+<!--End SubTitle-->  
+<!--Old Search button start-->
+  <!--<form  action="javascript:test()">
+       <div><label><b>Folder Name : </b></label><input id="searchTxt"></input>&nbsp;&nbsp;&nbsp;
+       <input id="searchBtn" type="button" value="Search"></input>
+	   </div>	<br>
+  </form>-->
+  <!--Old Search button end-->
+  
+<!-- Search button new start-->
+<br>
+<div>
+<table cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+<td style="height:22px;background-repeat:repeat-x;vertical-align:top">
+<img alt="" src="images/controls/qfind_l.gif">
+</td>
+<td style="height:22px;background-image:url(images/controls/qfind_bg.gif);background-repeat:repeat-x;vertical-align:top">
+<input id="value" class="textbox" type="text" style="width:175px;margin-left:2px;margin-top:2px;border-width:0px;border-style:none;background-color:transparent" name="value">
+</td>
+<td>
+<span>
+<img id="value_clear" alt="" src="images/controls/qfind_r.gif" style="cursor: default;">
+</span>
+</td>
+<td style="padding-left:5px">
+<span>
+<img id="value_go" alt="" src="images/buttons/secondary/go_d.gif" style="cursor: default;">
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- Search button new end-->
+	<a href="" id="dataLink" download="resultExport"></a>
+	<br>
+    <div id="exportDatagrid" align="center">
+  	 <table id="dataGrid" class="border-thin font-large" width=100% style="margin-top:5px;" border="0" cellpadding="3" cellspacing="1">
+	   <thead  style="font-weight:bold !important;">
+		 <tr style="background-image:url(./images/gradient.gif);">
+			<th class="border-thin">Folders</th>
+			<th class="border-thin" style="text-align:center">
+			<img src="./images/status/passed.gif" style="vertical-align:middle" alt="">Passed</th>
+			<th class="border-thin" style="text-align:center">
+			<img src="./images/status/pending.gif" style="vertical-align:middle" alt="">Pending</th>
+			<th class="border-thin" style="text-align:center">
+			<img src="./images/status/failed.gif" style="vertical-align:middle" alt="">Failed</th>
+			<th class="border-thin" style="text-align:center">
+			<img src="./images/status/blocked.gif" style="vertical-align:middle" alt="">Blocked</th>
+			<th class="border-thin" style="text-align:center">
+			<img src="./images/status/dropped.gif" style="vertical-align:middle" alt="">Dropped</th>
+			<th class="border-thin" style="text-align:center">
+			<img src="./images/status/passex.gif" style="vertical-align:middle" alt="">Pass w/ X</th>
+			<th class="border-thin" style="text-align:center">Executed</th>
+			<th class="border-thin" style="text-align:center">Total</th>
+			<th class="border-thin" style="text-align:center">Quality</th>
+			<th class="border-thin" style="text-align:center">
+			<img src="./images/objects/defect.gif" style="vertical-align:middle" alt="">Defects</th>
+		  </tr>
+	   </thead>
+			<tbody>
+				
+		   </tbody>
+	</table> 
+</div>
+<!-- export and refresh-->
+<div id="refreshAndExport" class="border-horizontal" style="margin-top:15px;margin-left:15px;padding:5px;">
+
+    <div style="float:left">
+Export to:
+<span class="link-normal" onclick="downloadExcel()">Excel</span></div>
+    
+    <div style="float:right;margin-right:10px">
+
+        <span class="link-normal" onclick="refresh()">Refresh</span> this report</div>
+    
+    <br style="clear:both">
+
+</div>
+<!-- export and refresh end-->
+<div id="resultDialog" width=100% style="display:none"  title="View Entities">
+    <table id="resultDataset" style="width:100%"><table>
+    <!--input type="button" value="Close" onclick="tims.Close()"-->
+	<br>
+	<img id="close" alt="" src="images/buttons/close.gif" style="cursor: default; float:right" onclick="tims.Close()">
+</div> 
+</body>
+</html>

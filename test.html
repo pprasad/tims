@@ -1,0 +1,67 @@
+<html>
+ <head>
+   <link rel="stylesheet" type="text/css" href="./css/dialog.css">
+   <link rel="stylesheet" type="text/css" href="./css/tms.css">
+   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.css" />
+       <link rel="stylesheet" type="text/css" href="./css/styleTable1.css">
+<link rel="stylesheet" type="text/css" href="./css/styleTable.css">
+<link rel="stylesheet" type="text/css" href="./css/tms.css">
+   <script type="text/javascript" src="./js/jquery-1.7.min.js"></script>
+	<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="./js/jquery.treetable.js"></script>
+	<script type="text/javascript" src="./js/jquery.blockUI.js"></script>
+	<script type="text/javascript" src="./test/tms.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<link href="./css/jquery.treetable.css" rel="stylesheet" type="text/css" />
+	<link href="./css/jquery.treetable.theme.default.css" rel="stylesheet" type="text/css" />
+    <script src="./js/jquery.treetable.js"></script>
+	<script type="text/javascript">
+	   $(document).ready(function(){
+	       tims.loadTreeView('dataGrid');
+		   tims.resultTable();
+	       $("#searchBtn").click(function(){
+		          //ar data=tims.Floders($("#searchTxt").val());
+		         tims.preparedStructure();
+		    });
+				  
+ 	   });
+	</script>
+</head>
+<body>
+  <!--Start BannerInformation-->
+  <div id="banner" style="background-image: url(./images/banner.png); height: 100px; width: 100%;">
+     <table style="width: 100%; height: 100%">
+        <tr>
+            <td style="width: 100%; height: 100%; vertical-align: middle;">
+              <h1>Test Information Management System</h1>
+            </td>
+        </tr>
+    </table>
+  </div>
+  <label><b>Folder Name : </b></label><input id="searchTxt" value="MongoFolder1"></input>&nbsp;&nbsp;&nbsp;
+  <input id="searchBtn" type="button" value="Search"></input>
+	<div id="main" align="center">
+		<table id="dataGrid" style="width:800px;">
+		   <thead>
+			 <tr>
+				<th>Folder</th>
+				<th>Passed</th>
+				<th>Pending</th>
+				<th>Fail</th>
+				<th>Blocked</th>
+				<th>Dropped</th>
+				<th>Passed With Exception</th>
+				<th>Defects</th>
+			  </tr>
+		   </thead>
+				<tbody>
+					 
+			   </tbody>
+		</table> 
+	</div>
+<div id="resultDialog">
+    <table id="resultDataset"><table>
+    <input type="button" value="Close" onclick="tims.Close()">
+</div>  
+</body>
+</html>

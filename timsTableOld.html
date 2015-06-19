@@ -1,0 +1,93 @@
+<html>
+ <head>
+    <link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="./css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/tms.css">
+	<link href="./css/jquery.treetable.css" rel="stylesheet" type="text/css" />
+	<link href="./css/jquery.treetable.theme.default.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="./js/jquery-1.7.min.js"></script>
+	<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="./js/jquery-ui.js"></script>
+	<script type="text/javascript" src="./js/jquery.blockUI.js"></script>
+	<script type="text/javascript" src="./js/tims.min-1.2.5.js"></script>
+	<script type="text/javascript" src="./js/Btree.min.js"></script>
+	<script src="./js/jquery.treetable.js"></script>
+	<script type="text/javascript">
+	   $(document).ready(function(){
+	     	tims.loadTreeView('dataGrid');
+			tims.resultTable();
+	       $("#searchBtn").click(function(){
+		         var data=tims.Floders($("#searchTxt").val());
+			    //tims.preparedStructure();
+		    });
+		  $("#searchBtn1").click(function(){
+               tims.demo('dataGrid');
+           });
+		  $("#exportExcelBtn").click(function(e){
+              tims.exportExcel('exportDatagrid','dataLink');
+			  e.preventDefault();
+          });		  
+ 	   });
+	   $(document).ajaxStart(function(){
+	        $.blockUI({ fadeIn : 0,
+                    fadeOut : 0,
+                    showOverlay : false});   
+		});
+		$(document).ajaxComplete(function(){
+		    $.unblockUI(); 
+		});
+	</script>
+</head>
+<body>
+  <!--Start BannerInformation-->
+  <div id="banner" style="background-image: url(./images/banner.png); height: 100px; width: 100%;">
+     <table style="width: 100%; height: 100%">
+        <tr>
+            <td style="width: 100%; height: 100%; vertical-align: middle;">
+              <h1>Test Information Management System</h1>
+            </td>
+        </tr>
+    </table>
+  </div>
+<!--End BannerInformation-->
+<!--Start SubTitle-->
+  <div id="summaryHeader"> 
+	   <img src="./images/summary.png" height="42" width="42" style="display: inline-block"> 
+	   <h1 style="display: inline-block">Summary Report</h1>
+  </div>
+<!--End SubTitle-->  
+  <form  action="javascript:test()">
+       <div><label><b>Folder Name : </b></label><input id="searchTxt"></input>&nbsp;&nbsp;&nbsp;
+       <input id="searchBtn" type="button" value="Search"></input>
+	   </div>	<br>
+  </form>
+    <button id="exportExcelBtn">Export</button>
+	<a href="" id="dataLink" download="resultExport"></a>
+    <div id="exportDatagrid" align="center">
+     <table id="dataGrid" class="treetable">
+	   <thead>
+		 <tr>
+			<th>Folder</th>
+			<th>Passed</th>
+			<th>Pending</th>
+			<th>Fail</th>
+			<th>Blocked</th>
+			<th>Dropped</th>
+			<th>Passed With Exception</th>
+			<th>Executed</th>
+			<th>Total</th>
+			<th>Quality</th>
+			<th>Defects</th>
+		  </tr>
+	   </thead>
+			<tbody>
+				
+		   </tbody>
+	</table> 
+</div>
+<div id="resultDialog" style="display:none"  title="ResultWindow">
+    <table id="resultDataset" style="width:100%"><table>
+    <input type="button" value="Close" onclick="tims.Close()">
+</div> 
+</body>
+</html>
